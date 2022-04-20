@@ -27,7 +27,7 @@ public class Course {
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
     private List<CourseOffering> courseOfferings;
 
-    @ManyToMany(mappedBy="courses")
-    private List<Student> students;
+   /* @ManyToMany(mappedBy="courses")
+    private List<Student> students;*/
 
 }
