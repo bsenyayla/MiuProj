@@ -61,6 +61,10 @@ public class Student {
         this.courseOffering.addAll(courseOffering);
     }
 
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
        /* @ManyToOne()
     @JoinColumn(name = "classroom_id")
     private Classroom classroom;*/
