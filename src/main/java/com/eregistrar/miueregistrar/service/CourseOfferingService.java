@@ -10,5 +10,4 @@ public interface CourseOfferingService {
     public abstract List<CourseOffering> getCourseOfferings();
     public abstract CourseOffering getCourseOfferingById(int id);
     public abstract void removeCourseOffering(int id);
-    public abstract Student updateCourseOffering(int id, CourseOffering courseOffering);
 }

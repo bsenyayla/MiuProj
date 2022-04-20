@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +34,10 @@ public class Student {
     @JoinColumn(name="student_transcript_ID")
     private Transcript transcript;
 
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "faculty_id")
+    private Faculty advisor;
+
     @NotNull(message = "Student Number must not be null")
     @Column(nullable = false)
     private String studentNumber;
@@ -44,24 +49,30 @@ public class Student {
     @Column(nullable = false)
     private String lastName;
 
-    private String dateOfEnrollment;
-
-   /* @ManyToOne()
-    @JoinColumn(name = "classroom_id")
-    private Classroom classroom;*/
-
-    @ManyToMany(cascade=CascadeType.MERGE)
-    @JoinTable(
-            name="students_courses",
-            joinColumns={@JoinColumn(name="student_id", referencedColumnName="student_id")},
-            inverseJoinColumns={@JoinColumn(name="course_id", referencedColumnName="course_id")})
-    private List<Course> courses;
+    private LocalDate dateOfEnrollment;
 
     public List<CourseOffering> getCourseOffering() {
         return courseOffering;
     }
+    public void addCourseOffering(List<CourseOffering> courseOffering) {
+        if(this.courseOffering == null){
+            this.courseOffering = new ArrayList<>();
+        }
+        this.courseOffering.addAll(courseOffering);
+    }
 
-    public List<Course> getCourses() {
+       /* @ManyToOne()
+    @JoinColumn(name = "classroom_id")
+    private Classroom classroom;*/
+
+    /*@ManyToMany(cascade=CascadeType.MERGE)
+    @JoinTable(
+            name="students_courses",
+            joinColumns={@JoinColumn(name="student_id", referencedColumnName="student_id")},
+            inverseJoinColumns={@JoinColumn(name="course_id", referencedColumnName="course_id")})
+    private List<Course> courses;*/
+
+    /*public List<Course> getCourses() {
         return courses;
     }
 
@@ -71,7 +82,7 @@ public class Student {
         }
         this.courses.addAll(course);
     }
-
+*/
     @Override
     public String toString() {
         return "Student{" +
@@ -82,7 +93,6 @@ public class Student {
                 ", lastName='" + lastName + '\'' +
                 ", dateOfEnrollment=" + dateOfEnrollment +
                 ", transcript=" + transcript +
-                ", courses=" + courses +
                 '}';
     }
 }

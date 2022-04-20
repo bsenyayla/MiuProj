@@ -21,4 +21,6 @@ public class Faculty {
     private String lastName;
     @OneToMany(mappedBy = "faculty", cascade = CascadeType.ALL)
     private List<CourseOffering> courseOfferings;
+    @OneToMany(mappedBy = "advisor", cascade = CascadeType.ALL)
+    private List<Student> advisees;
 }
