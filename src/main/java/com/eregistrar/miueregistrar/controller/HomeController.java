@@ -5,8 +5,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class HomeController {
+    @GetMapping(value = {"/",
+            "/elibrary",
+            "/public/home"})
 
-    @GetMapping(value = {"/","/elibrary","/public/home"})
     public String home0() {
         return "redirect:/elibrary/public/home";
     }
@@ -30,7 +32,5 @@ public class HomeController {
     public String home2() {
         return "secured/index";
     }
-
-
 
 }

@@ -34,8 +34,8 @@ public class Student {
     @JoinColumn(name="student_transcript_ID")
     private Transcript transcript;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "faculty_id")
+    @ManyToOne
+    @JoinColumn(name = "faculty_student_id", nullable=false)
     private Faculty advisor;
 
     @NotNull(message = "Student Number must not be null")

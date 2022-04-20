@@ -19,18 +19,22 @@ public class CourseOffering {
     @Column(name = "course_offering_id")
     private Integer courseOfferingId;
     private Integer capacity;
+
     @ManyToOne
     @JoinColumn(name = "block_block_id")
     @Autowired
     private Block block;
+
     @ManyToOne
     @JoinColumn(name = "course_course_id")
     @Autowired
     private Course course;
+
     @ManyToOne
     @JoinColumn(name = "faculty_faculty_id")
     @Autowired
     private Faculty faculty;
+
     @ManyToMany(mappedBy = "courseOffering")
     private List<Student> students;
 }
