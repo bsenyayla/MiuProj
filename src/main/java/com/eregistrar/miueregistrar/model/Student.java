@@ -89,7 +89,6 @@ public class Student {
                 "studentId=" + studentId +
                 ", studentNumber='" + studentNumber + '\'' +
                 ", firstName='" + firstName + '\'' +
-                ", middleName='" + middleName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", dateOfEnrollment=" + dateOfEnrollment +
                 ", transcript=" + transcript +
