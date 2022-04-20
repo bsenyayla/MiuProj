@@ -7,97 +7,131 @@
     <title>The e-Registrar - webapp - Home</title>
 </head>
 <body>
-    <div layout:fragment="content" style="padding-top:1em;" class="container">
-        <h3>Welcome to the e-Registar<sup>&reg;</sup></h3>
-        <hr/>
-        <div style="font-size: 1em">
-            <img th:src="@{/images/fairfield-city.jpg}"/><br/><br/>
-            <p>We are a top-flight, fully-digitized library.
-                Find out more <a href="/elibrary/public/about">about us</a> and
-                and learn how we can serve you with a widest variety of books and lots of other
-                digital content, all for your education as well as your entertainment.
-                You can also <a href="/elibrary/public/virtualtour">take a virtual tour</a>,
-                of our world-class facilities and be amazed at all what we have in stock
-                for you, your family and friends.</p>
 
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy text
-                ever since the 1500s, when an unknown printer took a galley of type
-                and scrambled it to make a type specimen book. It has survived not
-                only five centuries, but also the leap into electronic typesetting,
-                remaining essentially unchanged. It was popularised in the 1960s with
-                the release of Letraset sheets containing Lorem Ipsum passages, and
-                more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
 
-            <p sec:authorize="isAnonymous()">Already have access as a Member, Librarian or System Administrator? Then, simply <a href="/elibrary/public/login">Sign-In.</a>
-                to access the full range of services available to you, based on your role and access rights.</p>
+<div layout:fragment="content" style="padding-top:1em;" class="container">
+    <h3>Student Management System<sup>&reg;</sup></h3>
+    <hr/>
+    <div style="font-size: 1em">
+        <p>You can access your operations for all roles on this screen.
+            course selection .
+            transcript, your current courses.</p>
+        <img style="width: 100%; height: 135px;" th:src="@{/images/fairfield-city.jpg}"/>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
 
-            <div class="row">
-                <div sec:authorize="hasRole('ROLE_LIBMEMBER')" class="col-md-4">
-                    <div style="font-size: 1em;">
-                        <div class="card border-primary mb-3" style="max-width: 20rem;">
-                            <a style="text-decoration: inherit;" href="/elibrary/secured/services/book/list">
-                                <div style="color: #1a1a1a;" class="card-header">Books</div>
-                                <div class="card-body">
-                                    <h4 class="card-title">Our Collection of Books</h4>
-                                    <p class="card-text">
-                                        Browse our large collection of books, and make your selection from
-                                        many popular titles, covering a wide variety of subjects.
-                                        <br/><br/>
-                                    </p>
-                                </div>
-                            </a>
+
+        <div class="row">
+
+            <div  class="col-md-4">
+                <div style="font-size: 1em;">
+                    <div class="card border-primary mb-3" style="max-width: 20rem;">
+                        <div class="card-header">System Administration</div>
+
+                        <div  class="card-body"><!--sec:authorize="hasRole('ROLE_ADMIN')"-->
+                            <h4 class="card-title">Admin Tools</h4>
+                            <p class="card-text">
+                                <a href="/elibrary/secured/services/admin/usrmgmt/list">
+                                    Block Management
+                                </a>
+                            </p>
+                            <p class="card-text">
+                                <a href="#">
+                                    Course Offering Management
+                                </a>
+                            </p>
+                            <p class="card-text">
+                                <a href="/secured/services/admin/usrmgmt/list">
+                                    User List
+                                </a>
+                            </p>
+
+                            <p class="card-text">
+                                <a href="/secured/services/admin/usrmgmt/user/new">
+                                    New User
+                                </a>
+                            </p>
                         </div>
-                    </div>
-                </div>
 
-                <div sec:authorize="hasRole('ROLE_LIBRARIAN')" class="col-md-4">
-                    <div style="font-size: 1em;">
-                        <div class="card border-primary mb-3" style="max-width: 20rem;">
-                            <a style="text-decoration: inherit;" href="/elibrary/secured/services/checkout">
-                                <div style="color: #1a1a1a;" class="card-header">Check-In / Check-Out</div>
-                                <div class="card-body">
-                                    <h4 class="card-title">Check-in and check-out services</h4>
-                                    <p class="card-text">
-                                        Perform a check-out to lend a book out to a Library member.
-                                        Or perform a check-in to receive book(s) returned.
-                                    </p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div sec:authorize="hasRole('ROLE_ADMIN')" class="col-md-4">
-                    <div style="font-size: 1em;">
-                        <div class="card border-primary mb-3" style="max-width: 20rem;">
-                            <div class="card-header">System Administration</div>
-                            <div class="card-body">
-                                <h4 class="card-title">Admin Tools</h4>
-                                <p class="card-text">
-                                    <a href="/elibrary/secured/services/admin/usrmgmt/list">
-                                        Manage Users and Membership
-                                    </a>
-                                </p>
-                                <p class="card-text">
-                                    <!-- <a href="/elibrary/secured/services/admin/versioninfo">-->
-                                    <a href="#">
-                                        Version Information
-                                    </a>
-                                </p>
-                                <p class="card-text">
-                                    <a href="#">
-                                        Miscellaneous services
-                                    </a>
-                                </p>
-                            </div>
-                            </a>
-                        </div>
+                        </a>
                     </div>
                 </div>
             </div>
+
+            <div  class="col-md-4">
+                <div style="font-size: 1em;">
+                    <div class="card border-primary mb-3" style="max-width: 20rem;">
+                        <a style="text-decoration: inherit;" href="/elibrary/secured/services/book/list">
+
+                            <div style="color: #1a1a1a;" class="card-header">Students</div>
+                            <div  class="card-body"><!-- sec:authorize="hasRole('ROLE_LIBMEMBER')"-->
+                                <h4 class="card-title">Admin Tools</h4>
+                                <p class="card-text">
+                                    <a href="/elibrary/secured/services/admin/usrmgmt/list">
+                                        Show Transcript
+                                    </a>
+                                </p>
+                                <p class="card-text">
+
+                                    <a href="#">
+                                        Schedule
+                                    </a>
+                                </p>
+                                <p class="card-text">
+                                    <a href="#">
+                                        Course Offering
+                                    </a>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div  class="col-md-4">
+                <div style="font-size: 1em;">
+                    <div class="card border-primary mb-3" style="max-width: 20rem;">
+                        <a style="text-decoration: inherit;" href="/elibrary/secured/services/checkout">
+                            <div style="color: #1a1a1a;" class="card-header">Faculty</div>
+                            <div  class="card-body"><!-- sec:authorize="hasRole('ROLE_FACULTY')"-->
+                                <h4 class="card-title">Admin Tools</h4>
+                                <p class="card-text">
+                                    <a href="/elibrary/secured/services/admin/usrmgmt/list">
+                                        Students I mentor
+                                    </a>
+                                </p>
+                                <p class="card-text">
+                                    <a href="#">
+                                        Grading system
+                                    </a>
+                                </p>
+                                <p class="card-text">
+                                    <a href="#">
+                                        Demand Management
+                                    </a>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
+
+        <p sec:authorize="isAnonymous()">Already have access as a Member, Librarian or System Administrator? Then, simply <a href="/elibrary/public/login">Sign-In.</a>
+            to access the full range of services available to you, based on your role and access rights.
+        </p>
+
+
     </div>
+</div>
+
+
+
+
+
+
 
     <th:block layout:fragment="footer"></th:block>
 
