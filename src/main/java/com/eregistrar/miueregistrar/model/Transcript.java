@@ -1,44 +1,27 @@
 package com.eregistrar.miueregistrar.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 @Entity
+@Table(name = "transcripts")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Transcript {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer transcriptId;
     private String degreeTitle;
+    private Double grade;
 
-    @OneToOne(mappedBy = "transcript")
-    private Student student;
+    @OneToOne
+    @JoinColumn(name="transcript_courseoffering_ID")
+    private CourseOffering courseOffering;
 
-    public Transcript(Integer transcriptId, String degreeTitle) {
-        this.transcriptId = transcriptId;
-        this.degreeTitle = degreeTitle;
-    }
-
-    public Transcript(String degreeTitle) {
-        this.degreeTitle = degreeTitle;
-    }
-
-    public Transcript() {
-    }
-
-    public Integer getTranscriptId() {
-        return transcriptId;
-    }
-
-    public void setTranscriptId(Integer transcriptId) {
-        this.transcriptId = transcriptId;
-    }
-
-    public String getDegreeTitle() {
-        return degreeTitle;
-    }
-
-    public void setDegreeTitle(String degreeTitle) {
-        this.degreeTitle = degreeTitle;
-    }
 
 }

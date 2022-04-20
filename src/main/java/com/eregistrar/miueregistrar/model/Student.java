@@ -1,5 +1,9 @@
 package com.eregistrar.miueregistrar.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
@@ -7,6 +11,9 @@ import java.util.List;
 
 @Entity
 @Table(name = "students")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Student {
 
     @Id
@@ -22,6 +29,10 @@ public class Student {
     )
     private List<CourseOffering> courseOffering;
 
+    @OneToOne
+    @JoinColumn(name="student_transcript_ID")
+    private Transcript transcript;
+
     @NotNull(message = "Student Number must not be null")
     @Column(nullable = false)
     private String studentNumber;
@@ -32,17 +43,12 @@ public class Student {
 
     @Column(nullable = false)
     private String lastName;
-    private double cgpa;
 
     private String dateOfEnrollment;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "transcript_fk",unique = true)
-    private Transcript transcript;
-
-    @ManyToOne()
+   /* @ManyToOne()
     @JoinColumn(name = "classroom_id")
-    private Classroom classroom;
+    private Classroom classroom;*/
 
     @ManyToMany(cascade=CascadeType.MERGE)
     @JoinTable(
@@ -53,133 +59,6 @@ public class Student {
 
     public List<CourseOffering> getCourseOffering() {
         return courseOffering;
-    }
-
-    public Student(Integer studentId, String studentNumber, String firstName, String middleName, String lastName, double cgpa, String dateOfEnrollment, Transcript transcript) {
-        this.studentId = studentId;
-        this.studentNumber = studentNumber;
-        this.firstName = firstName;
-        this.middleName = middleName;
-        this.lastName = lastName;
-        this.cgpa = cgpa;
-        this.dateOfEnrollment = dateOfEnrollment;
-        this.transcript = transcript;
-    }
-
-    public Student(Integer studentId, String studentNumber, String firstName, String middleName, String lastName, double cgpa, String dateOfEnrollment) {
-        this.studentId = studentId;
-        this.studentNumber = studentNumber;
-        this.firstName = firstName;
-        this.middleName = middleName;
-        this.lastName = lastName;
-        this.cgpa = cgpa;
-        this.dateOfEnrollment = dateOfEnrollment;
-    }
-
-    public Student(String studentNumber, String firstName, String middleName, String lastName, double cgpa, String dateOfEnrollment, Transcript transcript) {
-        this.studentNumber = studentNumber;
-        this.firstName = firstName;
-        this.middleName = middleName;
-        this.lastName = lastName;
-        this.cgpa = cgpa;
-        this.dateOfEnrollment = dateOfEnrollment;
-        this.transcript = transcript;
-    }
-
-    public Student(String studentNumber, String firstName, String middleName, String lastName, double cgpa, String dateOfEnrollment) {
-        this.studentNumber = studentNumber;
-        this.firstName = firstName;
-        this.middleName = middleName;
-        this.lastName = lastName;
-        this.cgpa = cgpa;
-        this.dateOfEnrollment = dateOfEnrollment;
-    }
-
-    public Student() {
-    }
-
-    public Student(String studentNumber, String firstName, String middleName, String lastName, double cgpa, String dateOfEnrollment, Transcript transcript, Classroom classroom) {
-        this.studentNumber = studentNumber;
-        this.firstName = firstName;
-        this.middleName = middleName;
-        this.lastName = lastName;
-        this.cgpa = cgpa;
-        this.dateOfEnrollment = dateOfEnrollment;
-        this.transcript = transcript;
-        this.classroom = classroom;
-    }
-
-
-    public Integer getStudentId() {
-        return studentId;
-    }
-
-    public void setStudentId(Integer studentId) {
-        this.studentId = studentId;
-    }
-
-    public String getStudentNumber() {
-        return studentNumber;
-    }
-
-    public void setStudentNumber(String studentNumber) {
-        this.studentNumber = studentNumber;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getMiddleName() {
-        return middleName;
-    }
-
-    public void setMiddleName(String middleName) {
-        this.middleName = middleName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public double getCgpa() {
-        return cgpa;
-    }
-
-    public void setCgpa(double cgpa) {
-        this.cgpa = cgpa;
-    }
-
-    public String getDateOfEnrollment() {
-        return dateOfEnrollment;
-    }
-
-    public void setDateOfEnrollment(String dateOfEnrollment) {
-        this.dateOfEnrollment = dateOfEnrollment;
-    }
-
-    public Transcript getTranscript() {
-        return transcript;
-    }
-
-    public void setTranscript(Transcript transcript) {
-        this.transcript = transcript;
-    }
-
-    public Classroom getClassroom() {
-        return classroom;
-    }
-
-    public void setClassroom(Classroom classroom) {
-        this.classroom = classroom;
     }
 
     public List<Course> getCourses() {
@@ -201,10 +80,8 @@ public class Student {
                 ", firstName='" + firstName + '\'' +
                 ", middleName='" + middleName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", cgpa=" + cgpa +
                 ", dateOfEnrollment=" + dateOfEnrollment +
                 ", transcript=" + transcript +
-                ", classroom=" + classroom +
                 ", courses=" + courses +
                 '}';
     }
