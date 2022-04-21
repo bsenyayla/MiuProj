@@ -34,9 +34,9 @@ public class Student {
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
     private List<CourseOffering> courseOffering;
 
-    @OneToOne
+    @OneToMany
     @JoinColumn(name="student_transcript_ID")
-    private Transcript transcript;
+    private List<Transcript> transcript;
 
     @ManyToOne
     @JoinColumn(name = "faculty_student_id", nullable=false)

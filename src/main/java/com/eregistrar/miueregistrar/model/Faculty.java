@@ -21,6 +21,8 @@ public class Faculty {
     private String lastName;
     @OneToMany(mappedBy = "faculty", cascade = CascadeType.ALL)
     private List<CourseOffering> courseOfferings;
-    @OneToMany(mappedBy = "advisor", cascade = CascadeType.ALL)
+
+    @OneToMany
+    @JoinColumn(name = "student_faculty_id")
     private List<Student> advisees;
 }
