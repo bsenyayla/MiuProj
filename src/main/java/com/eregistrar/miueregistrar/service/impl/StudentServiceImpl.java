@@ -22,7 +22,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Student saveStudent(Student student) {
-        studentRepository.findById(student.getStudentId()).orElse(null);
+
         return  studentRepository.save(student);
     }
 

@@ -22,12 +22,16 @@ public class Student {
     @Column(name = "student_id")
     private Integer studentId;
 
-   @ManyToMany(cascade=CascadeType.MERGE)
+   /*@ManyToMany(cascade=CascadeType.MERGE)
     @JoinTable(
             name="students_courseofferings",
             joinColumns = {@JoinColumn(name="student_id", referencedColumnName = "student_id")},
             inverseJoinColumns = {@JoinColumn(name="course_offering_id", referencedColumnName = "course_offering_id")}
     )
+    private List<CourseOffering> courseOffering;
+*/
+
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
     private List<CourseOffering> courseOffering;
 
     @OneToOne
@@ -54,11 +58,19 @@ public class Student {
     public List<CourseOffering> getCourseOffering() {
         return courseOffering;
     }
+
     public void addCourseOffering(List<CourseOffering> courseOffering) {
         if(this.courseOffering == null){
             this.courseOffering = new ArrayList<>();
         }
         this.courseOffering.addAll(courseOffering);
+    }
+
+    public void addCourseOffering(CourseOffering courseOffering) {
+        if(this.courseOffering == null){
+            this.courseOffering = new ArrayList<>();
+        }
+        this.courseOffering.add(courseOffering);
     }
 
     @OneToOne

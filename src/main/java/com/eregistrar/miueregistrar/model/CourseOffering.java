@@ -35,6 +35,11 @@ public class CourseOffering {
     @Autowired
     private Faculty faculty;
 
-    @ManyToMany(mappedBy = "courseOffering")
-    private List<Student> students;
+    //@ManyToMany(mappedBy = "courseOffering")
+    //private List<Student> students;
+
+    @ManyToOne
+    @JoinColumn(name = "student_student_id")
+    @Autowired
+    private Student student;
 }

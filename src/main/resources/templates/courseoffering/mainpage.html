@@ -45,14 +45,19 @@
                         <td th:text="${courseOffering.course.name}"></td>
                         <td th:text="${courseOffering.faculty.firstName}"></td>
                         <td th:text="${courseOffering.faculty.lastName}">
-                        <td th:text="${courseOffering.capacity}">
-                            <a th:href="@{'/fairfieldlibrary/publisher/edit/{Id}'(Id=${courseOffering.courseOfferingId})}">
+                        <td th:text="${courseOffering.capacity}"></td>
+                        <td>
+
+
+
+                            <a th:href="@{'/courseoffering/mainpage/addcourse/{Id}'(Id=${courseOffering.courseOfferingId})}">
                                 <i class="fa-regular fa-pen-to-square"></i> Take Course
                             </a>
                         </td>
+
                         <td>
-                            <a th:href="@{'/fairfieldlibrary/publisher/delete/{publisherId}'(Id=${courseOffering.courseOfferingId})}">
-                                <i class="fa-regular fa-book-atlas"></i> Leave Course
+                            <a th:href="@{'/courseoffering/mainpage/addcourse/{Id}'(Id=${courseOffering.courseOfferingId})}">
+                                <i class="fa-regular fa-pen-to-square"></i> Leave Course
                             </a>
                         </td>
                     </tr>
