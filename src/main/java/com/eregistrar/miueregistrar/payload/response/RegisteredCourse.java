@@ -9,6 +9,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class RegisteredCourse {
+    private Integer id;
     private String blockName;
     private String courseCode;
     private String courseName;

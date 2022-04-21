@@ -39,14 +39,14 @@ public interface ICourseService {
      * @param courseID the course id
      * @return the course by id
      */
-    Course getCourseByID(String courseID);
+    Course getCourseByID(Integer courseID);
 
     /**
      * Delete course by ID.
      *
      * @param courseID the course id
      */
-    void deleteCourseByID(String courseID);
+    void deleteCourseByID(Integer courseID);
 
     /**
      * Update course.

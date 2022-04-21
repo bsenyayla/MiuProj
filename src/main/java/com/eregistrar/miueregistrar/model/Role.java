@@ -6,6 +6,8 @@ import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -17,8 +19,10 @@ import java.util.Objects;
 @NoArgsConstructor
 public class Role {
     @Id
-    private String id;
+    private Integer id;
     private ERole name;
+    @ManyToMany(mappedBy = "roles")
+    private List<User> users;
 
     /**
      * Instantiates a new Role.

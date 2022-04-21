@@ -1,6 +1,7 @@
 package com.eregistrar.miueregistrar.controller;
 
 import com.eregistrar.miueregistrar.exceptions.CourseRegisterException;
+import com.eregistrar.miueregistrar.model.Block;
 import com.eregistrar.miueregistrar.model.Course;
 import com.eregistrar.miueregistrar.payload.request.CourseRequest;
 import com.eregistrar.miueregistrar.payload.response.CourseBlockResponse;
@@ -10,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -36,16 +39,13 @@ public class CourseController {
      * @param course the course
      */
     @PostMapping(value = "")
-    public ResponseEntity<MessageResponse> saveCourse(@RequestBody CourseRequest course) {
+    public void saveCourse(@ModelAttribute("courseForm") CourseRequest course, HttpServletResponse response) throws IOException {
         try {
             courseServiceImpl.saveCourse(course);
-            return ResponseEntity.ok(new MessageResponse("Course save operation successful."));
+            response.sendRedirect("/course.html");
         } catch (CourseRegisterException exc) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse(exc.getMessage()));
+            response.sendRedirect("/course.html");
         }
-
     }
 
     /**
@@ -73,7 +73,7 @@ public class CourseController {
      */
     @GetMapping(value = "/{id}")
     @ResponseBody
-    public Course getCourseByID(@PathVariable("id") String courseID){
+    public Course getCourseByID(@PathVariable("id") Integer courseID){
         return courseServiceImpl.getCourseByID(courseID);
     }
 
@@ -83,7 +83,7 @@ public class CourseController {
      * @param courseID the course id
      */
     @DeleteMapping(value = "/{id}")
-    public void deleteCourseByID(@PathVariable("id") String courseID){
+    public void deleteCourseByID(@PathVariable("id") Integer courseID){
         courseServiceImpl.deleteCourseByID(courseID);
     }
 

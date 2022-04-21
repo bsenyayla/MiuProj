@@ -77,12 +77,12 @@ public class CourseServiceImpl implements ICourseService {
     }
 
     @Override
-    public Course getCourseByID(String courseID) {
+    public Course getCourseByID(Integer courseID) {
         return courseRepository.findCourseById(courseID);
     }
 
     @Override
-    public void deleteCourseByID(String courseID) {
+    public void deleteCourseByID(Integer courseID) {
         courseRepository.deleteById(courseID);
     }
 

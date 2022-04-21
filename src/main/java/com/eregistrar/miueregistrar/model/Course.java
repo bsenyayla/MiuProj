@@ -16,12 +16,12 @@ import java.util.List;
 public class Course {
     @Id
     @GeneratedValue
-    private String id;
+    private Integer id;
     private String name;
     private String code;
     private int capacity;
 
-    protected Course() {}
+    public Course() {}
 
     @OneToOne
     @JoinColumn(name = "block_id", referencedColumnName = "id")
@@ -56,5 +56,7 @@ public class Course {
     public void addUser(User user){
         userList.add(user);
     }
+
+
 
 }

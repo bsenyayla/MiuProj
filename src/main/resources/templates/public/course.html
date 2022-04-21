@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/master-layout}">
+<head>
+    <title>Add Course</title>
+</head>
+<body>
+
+
+<div layout:fragment="content" style="padding-top:1em;" class="container">
+    <h3>Add Course</h3>
+    <hr/>
+    <form id="courseForm" method="post" th:action="@{/course}"  th:object="${courseForm}">
+        <fieldset>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p>Name: <input type="text" th:field="*{name}"/></p>
+                    </div>
+                </div>
+                <br/>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p>Code: <input type="text" th:field="*{code}"/></p>
+                    </div>
+                </div>
+                <br/>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p>Capacity: <input type="number" th:field="*{capacity}"/></p>
+                    </div>
+                </div>
+                <br/>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <span>Block:</span>
+                        <select th:field="*{blockId}">
+                            <option th:each="block : ${blocks}"
+                                    th:text="${block.name}"
+                                    th:value="${block.id}">
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <span>Faculty:</span>
+                        <select th:field="*{facultyId}">
+                            <option th:each="faculty : ${faculties}"
+                                    th:text="${faculty.username}"
+                                    th:value="${faculty.id}">
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <div class="row">
+            <div class="col-md-6">
+                <a href="/index.html" class="btn btn-warning btn-lg">Cancel</a>
+            </div>
+            <div class="col-md-6" style="text-align: right;">
+                <button type="reset" class="btn btn-primary btn-lg mx-2">Reset</button>
+                <button type="submit" class="btn btn-success btn-lg">
+                    <i class="fa-solid fa-floppy-disk"></i> Save
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<th:block layout:fragment="footer"></th:block>
+
+</body>
+</html>

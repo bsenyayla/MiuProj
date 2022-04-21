@@ -17,8 +17,9 @@ public interface IStudentService {
      * @param courseID the course id
      * @throws CourseRegisterException exception
      */
-    public void registerForCourse(String userID, String courseID) throws CourseRegisterException;
+    public void registerForCourse(Integer userID, Integer courseID) throws CourseRegisterException;
 
+    public void dropForCourse(Integer userID, Integer courseID) throws CourseRegisterException;
     /**
      * Gets courses by student id.
      *
@@ -26,5 +27,5 @@ public interface IStudentService {
      * @return the courses by student id
      * @throws CourseRegisterException the course register exception
      */
-    public List<RegisteredCourse> getCoursesByStudentId(String studentId) throws CourseRegisterException;
+    public List<RegisteredCourse> getCoursesByStudentId(Integer studentId) throws CourseRegisterException;
 }

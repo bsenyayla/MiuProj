@@ -22,7 +22,7 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue
-    private String id;
+    private Integer id;
 
     @NotBlank
     @Size(max = 20)
@@ -37,8 +37,17 @@ public class User {
     @Size(max = 120)
     private String password;
 
-    @OneToMany
-    @JoinColumn(name = "id")
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "user_role",
+            joinColumns = @JoinColumn(
+                    name = "user_id",
+                    referencedColumnName = "id"
+            ),
+            inverseJoinColumns = @JoinColumn(
+                    name = "role_id",
+                    referencedColumnName = "id"
+            )
+    )
     private List<Role> roles = new ArrayList<>();
 
     /**

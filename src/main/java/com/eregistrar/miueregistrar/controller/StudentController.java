@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -31,23 +33,30 @@ public class StudentController {
     /**
      * Register course.
      *
-     * @param userId   the user id
-     * @param courseId the course id
+     * @param id the course id
      */
-    @GetMapping(value = "/registerCourse")
-    public ResponseEntity<MessageResponse> addCourse(@RequestParam String userId, @RequestParam String courseId){
+    @GetMapping(value = "/register/{id}")
+    public void addCourse(@PathVariable Integer id, HttpServletResponse response) throws IOException {
         try {
-            studentServiceImpl.registerForCourse(userId, courseId);
-            return ResponseEntity.ok(new MessageResponse("Course registration successful."));
+            studentServiceImpl.registerForCourse(3, id);
+            response.sendRedirect("/registration.html");
+        } catch (CourseRegisterException | IOException exc) {
+            response.sendRedirect("/registration.html");
+        }
+    }
+
+    @GetMapping(value = "/drop/{id}")
+    public void dropCourse(@PathVariable Integer id, HttpServletResponse response) throws IOException {
+        try {
+            studentServiceImpl.dropForCourse(3, id);
+            response.sendRedirect("/schedule.html");
         } catch (CourseRegisterException exc) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse(exc.getMessage()));
+            response.sendRedirect("/schedule.html");
         }
     }
 
     @GetMapping(value = "/schedule")
-    public ResponseEntity<List<RegisteredCourse>> getSchedule(@RequestParam String studentId) {
+    public ResponseEntity<List<RegisteredCourse>> getSchedule(@RequestParam Integer studentId) {
         try {
             List<RegisteredCourse> courses = studentServiceImpl.getCoursesByStudentId(studentId);
             return ResponseEntity.ok(courses);

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/master-layout}">
+<head>
+    <title>Course Registration</title>
+</head>
+<body>
+
+<div layout:fragment="content" style="padding-top:1em;" class="container">
+    <h3>Course Registration</h3>
+    <hr/>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Block </th>
+            <th scope="col">Start Date</th>
+            <th scope="col">Course Code</th>
+            <th scope="col">Course Name</th>
+            <th scope="col">Faculty Name</th>
+            <th scope="col">Capacity</th>
+            <th scope="col">&nbsp;</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="courseOffering,iterStat : ${courses}">
+            <th scope="row" th:text="${iterStat.count}+${'.'}"></th>
+            <td th:text="${courseOffering.block.name}"></td>
+            <td th:text="${courseOffering.block.startDate}"></td>
+            <td th:text="${courseOffering.code}"></td>
+            <td th:text="${courseOffering.name}"></td>
+            <td th:text="${courseOffering.faculty.username}"></td>
+            <td th:text="${courseOffering.capacity}"></td>
+            <td>
+                <a th:href="@{'/student/register/{id}'(id=${courseOffering.id})}">
+                    <i class="fa-regular fa-pen-to-square"></i> Take Course
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<th:block layout:fragment="footer"></th:block>
+
+</body>
+</html>

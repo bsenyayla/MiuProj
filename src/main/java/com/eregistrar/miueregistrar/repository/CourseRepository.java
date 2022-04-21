@@ -8,14 +8,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 /**
  * The interface Course repository.
  */
-public interface CourseRepository extends JpaRepository<Course, String> {
+public interface CourseRepository extends JpaRepository<Course, Integer> {
     /**
      * Find course by id course.
      *
      * @param courseID the course id
      * @return the course
      */
-    Course findCourseById(String courseID);
+    Course findCourseById(Integer courseID);
 
     /**
      * Find course by name course.

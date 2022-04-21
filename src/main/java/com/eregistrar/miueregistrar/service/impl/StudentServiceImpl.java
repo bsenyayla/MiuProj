@@ -35,7 +35,7 @@ public class StudentServiceImpl implements IStudentService {
     }
 
     @Override
-    public void registerForCourse(String userID, String courseID) throws CourseRegisterException {
+    public void registerForCourse(Integer userID, Integer courseID) throws CourseRegisterException {
         Course course = courseRepository.findCourseById(courseID);
         User user = userRepository.findUserById(userID);
         if(ScheduleUtil.isStudent(user) && ScheduleUtil.isCourseExist(course)) {
@@ -49,7 +49,21 @@ public class StudentServiceImpl implements IStudentService {
         }
     }
     @Override
-    public List<RegisteredCourse> getCoursesByStudentId(String studentId) throws CourseRegisterException {
+    public void dropForCourse(Integer userID, Integer courseID) throws CourseRegisterException {
+        Course course = courseRepository.findCourseById(courseID);
+        User user = userRepository.findUserById(userID);
+        if(ScheduleUtil.isStudent(user) && ScheduleUtil.isCourseExist(course)) {
+            if (course.getUserList() != null && course.getUserList().size() < course.getCapacity()) {
+                courseRepository.deleteById(course.getId());
+                course.setUserList(course.getUserList().stream().filter(user1 -> user1.getId() != userID).toList());
+                courseRepository.save(course);
+            } else {
+                throw new CourseRegisterException("Course capacity is not enough.");
+            }
+        }
+    }
+    @Override
+    public List<RegisteredCourse> getCoursesByStudentId(Integer studentId) throws CourseRegisterException {
         User student = userRepository.findUserById(studentId);
         List<Course> allCourses = courseRepository.findAll();
         List<RegisteredCourse> registeredCourses = new ArrayList<>();
@@ -57,7 +71,7 @@ public class StudentServiceImpl implements IStudentService {
             for(Course course : allCourses) {
                 if(ScheduleUtil.isCourseExist(course)
                         && course.getUserList().stream().anyMatch(userData -> userData.getId().equals(studentId))) {
-                        registeredCourses.add( new RegisteredCourse(course.getBlock().getName(),
+                        registeredCourses.add( new RegisteredCourse(course.getId(), course.getBlock().getName(),
                                 course.getCode(), course.getName(),
                                 course.getFaculty().getUsername(),
                                 course.getBlock().getStartDate()));

@@ -9,7 +9,7 @@ import java.util.Optional;
 /**
  * The interface Role repository.
  */
-public interface RoleRepository extends JpaRepository<Role, String> {
+public interface RoleRepository extends JpaRepository<Role, Integer> {
     /**
      * Find by name optional.
      *

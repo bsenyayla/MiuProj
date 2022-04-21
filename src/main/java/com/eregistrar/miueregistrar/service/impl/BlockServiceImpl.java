@@ -37,12 +37,12 @@ public class BlockServiceImpl implements IBlockService {
     }
 
     @Override
-    public Block getBlockById(String blockId) {
+    public Block getBlockById(Integer blockId) {
         return blockRepository.findBlockById(blockId);
     }
 
     @Override
-    public void deleteBlockById(String blockId) {
+    public void deleteBlockById(Integer blockId) {
         blockRepository.deleteBlockById(blockId);
     }
 

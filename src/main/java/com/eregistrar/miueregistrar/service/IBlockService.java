@@ -28,14 +28,14 @@ public interface IBlockService {
      * @param blockId the block id
      * @return the block by id
      */
-    public Block getBlockById(String blockId);
+    public Block getBlockById(Integer blockId);
 
     /**
      * Delete block by id.
      *
      * @param blockId the block id
      */
-    public void deleteBlockById(String blockId);
+    public void deleteBlockById(Integer blockId);
 
     /**
      * Update block.

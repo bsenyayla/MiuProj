@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/master-layout}">
+<head>
+    <title>Add Block</title>
+</head>
+<body>
+
+
+<div layout:fragment="content" style="padding-top:1em;" class="container">
+    <h3>Add Block</h3>
+    <hr/>
+    <form id="blockForm" method="post" th:action="@{/block}"  th:object="${blockForm}">
+        <fieldset>
+            <legend>Block Information</legend>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p>Name: <input type="text" th:field="*{name}"/></p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p>Start Date: <input type="text" th:field="*{startDate}"/></p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <p>End Date: <input type="text" th:field="*{endDate}"/></p>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <div class="row">
+            <div class="col-md-6">
+                <a href="/index.html" class="btn btn-warning btn-lg">Cancel</a>
+            </div>
+            <div class="col-md-6" style="text-align: right;">
+                <button type="reset" class="btn btn-primary btn-lg mx-2">Reset</button>
+                <button type="submit" class="btn btn-success btn-lg">
+                    <i class="fa-solid fa-floppy-disk"></i> Save
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<th:block layout:fragment="footer"></th:block>
+
+</body>
+</html>

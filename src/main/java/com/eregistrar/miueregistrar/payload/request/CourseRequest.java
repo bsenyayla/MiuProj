@@ -10,6 +10,6 @@ public class CourseRequest {
     private String name;
     private String code;
     private int capacity;
-    private String blockId;
-    private String facultyId;
+    private Integer blockId;
+    private Integer facultyId;
 }

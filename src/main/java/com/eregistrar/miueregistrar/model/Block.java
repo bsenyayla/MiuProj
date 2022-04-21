@@ -15,7 +15,7 @@ import javax.persistence.Id;
 public class Block {
     @Id
     @GeneratedValue
-    private String id;
+    private Integer id;
     private String name;
     private String startDate;
     private String endDate;

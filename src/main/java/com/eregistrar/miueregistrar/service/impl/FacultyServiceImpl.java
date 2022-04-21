@@ -36,7 +36,7 @@ public class FacultyServiceImpl implements IFacultyService {
     }
 
     @Override
-    public List<Course> getCoursesByFacultyId(String facultyId) throws CourseRegisterException {
+    public List<Course> getCoursesByFacultyId(Integer facultyId) throws CourseRegisterException {
         User faculty = userRepository.findUserById(facultyId);
         List<Course> allCourses = courseRepository.findAll();
         List<Course> courses = new ArrayList<>();
@@ -51,14 +51,11 @@ public class FacultyServiceImpl implements IFacultyService {
     }
 
     @Override
-    public List<UserResponse> getFaculties() {
+    public List<User> getFaculties() {
         List<User> users = userRepository.findAll();
         List<User> faculties = users.stream().filter(user -> user.getRoles().stream()
                 .anyMatch(role -> role.getName().equals(ERole.ROLE_FACULTY))).toList();
-        List<UserResponse> editedFaculties = new ArrayList<>();
-        for(User faculty : faculties) {
-            editedFaculties.add(new UserResponse(faculty.getId(), faculty.getUsername()));
-        }
-        return editedFaculties;
+
+        return faculties;
     }
 }

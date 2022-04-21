@@ -6,6 +6,6 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class UserResponse {
-    private String id;
+    private Integer id;
     private String name;
 }

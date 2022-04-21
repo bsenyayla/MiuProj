@@ -9,14 +9,14 @@ import java.util.List;
 /**
  * The interface Block repository.
  */
-public interface BlockRepository extends JpaRepository<Block, String> {
+public interface BlockRepository extends JpaRepository<Block, Integer> {
     /**
      * Find block by id block.
      *
      * @param blockId the block id
      * @return the block
      */
-    Block findBlockById(String blockId);
+    Block findBlockById(Integer blockId);
 
     /**
      * Find block by name block.
@@ -39,6 +39,6 @@ public interface BlockRepository extends JpaRepository<Block, String> {
      * @param blockId the block id
      * @return the block
      */
-    Block deleteBlockById(String blockId);
+    Block deleteBlockById(Integer blockId);
 
 }

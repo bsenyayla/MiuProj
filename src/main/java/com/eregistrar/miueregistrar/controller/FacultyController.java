@@ -2,6 +2,7 @@ package com.eregistrar.miueregistrar.controller;
 
 import com.eregistrar.miueregistrar.exceptions.CourseRegisterException;
 import com.eregistrar.miueregistrar.model.Course;
+import com.eregistrar.miueregistrar.model.User;
 import com.eregistrar.miueregistrar.payload.response.UserResponse;
 import com.eregistrar.miueregistrar.service.impl.FacultyServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,7 @@ public class FacultyController {
      * @return the courses
      */
     @GetMapping(value = "courses")
-    public ResponseEntity<List<Course>> getCourses(@RequestParam String facultyId) {
+    public ResponseEntity<List<Course>> getCourses(@RequestParam Integer facultyId) {
         try {
             List<Course> courses = facultyService.getCoursesByFacultyId(facultyId);
             return ResponseEntity.ok(courses);
@@ -55,8 +56,8 @@ public class FacultyController {
      * @return the faculties
      */
     @GetMapping(value="")
-    public ResponseEntity<List<UserResponse>> getFaculties() {
-        List<UserResponse> faculties = facultyService.getFaculties();
+    public ResponseEntity<List<User>> getFaculties() {
+        List<User> faculties = facultyService.getFaculties();
         return ResponseEntity.ok(faculties);
     }
 }
