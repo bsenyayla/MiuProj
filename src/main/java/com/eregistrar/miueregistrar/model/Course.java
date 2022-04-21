@@ -1,33 +1,60 @@
 package com.eregistrar.miueregistrar.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This is the Course class which every student take during each block.
+ */
+@Getter
+@Setter
 @Entity
-@Table(name="courses")
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class Course {
-
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="course_id")
-    private int courseId;
-    @Column(nullable=false, unique=true)
+    @Id
+    @GeneratedValue
+    private String id;
     private String name;
-    @Column(name="course_code")
-    private String courseCode;
-    @Column(name="number_of_units")
-    private float numberOfUnits;
+    private String code;
+    private int capacity;
 
-    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
-    private List<CourseOffering> courseOfferings;
+    protected Course() {}
 
-   /* @ManyToMany(mappedBy="courses")
-    private List<Student> students;*/
+    @OneToOne
+    @JoinColumn(name = "block_id", referencedColumnName = "id")
+    private Block block;
+
+    @OneToOne
+    @JoinColumn(name = "faculty_id", referencedColumnName = "id")
+    private User faculty;
+
+    /**
+     * The User list.
+     */
+    @ManyToMany
+    @JoinTable(name = "course_users",
+            joinColumns = { @JoinColumn(name = "course_id") },
+            inverseJoinColumns = { @JoinColumn(name = "user_id") })
+    List<User> userList = new ArrayList<>();
+
+    public Course(String name, String code, int capacity, Block block, User faculty) {
+        this.name = name;
+        this.code = code;
+        this.capacity = capacity;
+        this.block = block;
+        this.faculty = faculty;
+    }
+
+    /**
+     * Add user.
+     *
+     * @param user the user
+     */
+    public void addUser(User user){
+        userList.add(user);
+    }
 
 }

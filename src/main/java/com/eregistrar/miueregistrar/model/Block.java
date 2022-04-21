@@ -1,25 +1,22 @@
 package com.eregistrar.miueregistrar.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-import java.time.LocalDate;
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
-@Entity
-@Table(name = "block")
+/**
+ * Block is duration of studying the course.
+ *
+ */
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Entity
 public class Block {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "blockId")
-    private Integer blockId;
-    private LocalDate startDate;
-    private String blockName;
-    @OneToMany(mappedBy = "block", cascade = CascadeType.ALL)
-    private List<CourseOffering> courseOffering;
+    @GeneratedValue
+    private String id;
+    private String name;
+    private String startDate;
+    private String endDate;
 }

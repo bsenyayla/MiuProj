@@ -1,9 +1,20 @@
 package com.eregistrar.miueregistrar.repository;
 
+import com.eregistrar.miueregistrar.model.ERole;
 import com.eregistrar.miueregistrar.model.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
-@Repository
-public interface RoleRepository extends JpaRepository<Role, Integer> {
+import java.util.Optional;
+
+/**
+ * The interface Role repository.
+ */
+public interface RoleRepository extends JpaRepository<Role, String> {
+    /**
+     * Find by name optional.
+     *
+     * @param name the name
+     * @return the optional
+     */
+    Optional<Role> findByName(ERole name);
 }
